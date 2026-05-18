@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<suite name="RegressionSuite">
+    <test name="LoginTest">
+        <classes>
+            <class name="TestRunner.LoginTest"/>
+        </classes>
+    </test>
+        <test name="PIM Test">
+        <classes>
+            <class name="TestRunner.PIMTest"/>
+        </classes>
+    </test>
+</suite>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<suite name="Login with cli">
+    <test name="Login Test">
+        <classes>
+            <class name="TestRunner.LoginWithJson"/>
+        </classes>
+    </test>
+</suite>
