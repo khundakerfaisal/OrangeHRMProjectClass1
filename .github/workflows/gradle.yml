@@ -1,0 +1,50 @@
+# This workflow uses actions that are not certified by GitHub.
+
+name: Java CI with Gradle
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Run Gradle Build
+        run: ./gradlew clean build
+
+      - name: Run TestNG Suite
+        run: ./gradlew clean test -Psuitename=regression.xml
+
+      - name: Upload Extent Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: extent-report
+          path: reports/
+
+
+
+    # Generates and submits a dependency graph, enabling Dependabot Alerts for all project dependencies.
+
+
+
