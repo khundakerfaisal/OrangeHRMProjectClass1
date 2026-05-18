@@ -8,8 +8,8 @@ on:
   pull_request:
     branches: ["main"]
   schedule:
-    - cron: '*/5 * * * *'   # Run every 5 minutes a day
-    # - cron: '0 */12 * * *'   # Run every 12 hours from start time
+    # - cron: '*/5 * * * *'   # Run every 5 minutes a day
+    - cron: '0 */12 * * *'   # Run every 12 hours from start time
 
 jobs:
   build:
