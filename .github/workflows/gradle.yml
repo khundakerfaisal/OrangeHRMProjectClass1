@@ -44,6 +44,57 @@ jobs:
         with:
           name: extent-report
           path: reports/
+      - name: Send Email on Failure
+        if: failure()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.SMTP_EMAIL }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+
+          subject: ❌ Automation Test Failed
+          body: |
+            Your automation test has FAILED ❌
+
+            Repo: ${{ github.repository }}
+            Branch: ${{ github.ref_name }}
+
+            Run Details:
+            ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+            Please find attached Extent Report.
+
+          to: ${{ secrets.TO_EMAIL }}
+          from: ${{ secrets.SMTP_EMAIL }}
+
+          attachments: reports/ExtentReport.html
+
+      - name: Send Email on Success
+        if: success()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.SMTP_EMAIL }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+
+          subject: ✅ Automation Test Passed
+          body: |
+            Your automation test has PASSED ✅
+
+            Repo: ${{ github.repository }}
+            Branch: ${{ github.ref_name }}
+
+            Run Details:
+            ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+            Please find attached Extent Report.
+
+          to: ${{ secrets.TO_EMAIL }}
+          from: ${{ secrets.SMTP_EMAIL }}
+
+          attachments: reports/ExtentReport.html
 
 
 
